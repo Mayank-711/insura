@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insurance Advisor Chatbot</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Main Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f7fa;
+            color: #333;
+        }
+        
+        /* Chatbot Button */
+        .chatbot-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: #2563eb;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .chatbot-btn:hover {
+            transform: scale(1.1);
+            background: #1d4ed8;
+        }
+
+        /* Chatbot Container */
+        .chatbot-container {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            width: 350px;
+            height: 500px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.15);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transform: translateY(20px);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .chatbot-container.active {
+            transform: translateY(0);
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Chatbot Header */
+        .chatbot-header {
+            background: #2563eb;
+            color: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chatbot-header h3 {
+            margin: 0;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        #closeChatbot {
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        /* Chatbot Body */
+        .chatbot-body {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            background: #f8fafc;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .chat-message {
+            max-width: 80%;
+            padding: 10px 15px;
+            border-radius: 12px;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        .bot-message {
+            background: white;
+            border: 1px solid #e5e7eb;
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+        }
+
+        .user-message {
+            background: #2563eb;
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+        }
+
+        /* Chatbot Footer */
+        .chatbot-footer {
+            padding: 12px;
+            display: flex;
+            gap: 8px;
+            border-top: 1px solid #e5e7eb;
+            background: white;
+        }
+
+        #userInput {
+            flex: 1;
+            padding: 10px 15px;
+            border: 1px solid #d1d5db;
+            border-radius: 20px;
+            outline: none;
+            font-size: 14px;
+        }
+
+        #sendMessage {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #2563eb;
+            color: white;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #sendMessage:hover {
+            background: #1d4ed8;
+        }
+
+        /* Typing Indicator */
+        .typing-indicator {
+            display: inline-block;
+            padding: 10px 15px;
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            border-bottom-left-radius: 4px;
+            align-self: flex-start;
+            font-size: 14px;
+        }
+
+        .typing-dots {
+            display: inline-flex;
+            gap: 4px;
+        }
+
+        .typing-dots span {
+            width: 6px;
+            height: 6px;
+            background: #6b7280;
+            border-radius: 50%;
+            display: inline-block;
+            animation: typingAnimation 1.4s infinite both;
+        }
+
+        .typing-dots span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-dots span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typingAnimation {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
+
+        /* Response Formatting */
+        .profile-summary, .recommendations, .comparison, .summary {
+            background: white;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-summary h3, .recommendations h3, .comparison h3, .summary h3 {
+            margin-top: 0;
+            color: #2563eb;
+        }
+
+        .profile-summary ul {
+            padding-left: 20px;
+            margin: 10px 0;
+        }
+
+        .explanation {
+            background: #eff6ff;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border-left: 4px solid #2563eb;
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Chatbot Button -->
+    <div class="chatbot-btn" id="chatbotBtn">
+        <i class="fas fa-robot"></i>
+    </div>
+    
+    <!-- Chatbot Container -->
+    <div class="chatbot-container" id="chatbot">
+        <div class="chatbot-header">
+            <h3><i class="fas fa-shield-alt"></i> Insurance Advisor</h3>
+            <button id="closeChatbot"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="chatbot-body" id="chatBody">
+            <div class="chat-message bot-message">
+                <p> Please tell me about yourself so I can help you find the best insurance options.</p>
+    <p>For example: <em>I'm 27, married, working in IT, earn 13LPA, want life insurance.</em></p>
+    <p>Also mention risk level low,medium,high</p>
+            </div>
+        </div>
+        <div class="chatbot-footer">
+            <input type="text" id="userInput" placeholder="Type your message..." autocomplete="off">
+            <button id="sendMessage"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const chatbotBtn = document.getElementById('chatbotBtn');
+            const chatbot = document.getElementById('chatbot');
+            const closeChatbot = document.getElementById('closeChatbot');
+            const chatBody = document.getElementById('chatBody');
+            const userInput = document.getElementById('userInput');
+            const sendMessageBtn = document.getElementById('sendMessage');
+            
+            // Toggle chatbot visibility
+            chatbotBtn.addEventListener('click', function() {
+                chatbot.classList.toggle('active');
+            });
+            
+            closeChatbot.addEventListener('click', function() {
+                chatbot.classList.remove('active');
+            });
+            
+            // Add message to chat
+            function addMessage(text, isUser = false) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `chat-message ${isUser ? 'user-message' : 'bot-message'}`;
+                
+                const messageContent = document.createElement('p');
+                messageContent.innerHTML = text;
+                messageDiv.appendChild(messageContent);
+                
+                chatBody.appendChild(messageDiv);
+                chatBody.scrollTop = chatBody.scrollHeight;
+            }
+            
+            // Show typing indicator
+            function showTyping() {
+                const typingDiv = document.createElement('div');
+                typingDiv.className = 'chat-message bot-message typing-indicator';
+                typingDiv.innerHTML = `
+                    <p>Insurance Advisor is typing <span class="typing-dots">
+                        <span></span><span></span><span></span>
+                    </span></p>
+                `;
+                chatBody.appendChild(typingDiv);
+                chatBody.scrollTop = chatBody.scrollHeight;
+                return typingDiv;
+            }
+            
+            // Get CSRF token from cookies
+            function getCSRFToken() {
+                const cookieValue = document.cookie
+                    .split('; ')
+                    .find(row => row.startsWith('csrftoken='))
+                    ?.split('=')[1];
+                return cookieValue;
+            }
+            
+            // Send message to backend
+            async function sendMessage() {
+                const message = userInput.value.trim();
+                if (!message) return;
+                
+                // Add user message to chat
+                addMessage(message, true);
+                userInput.value = '';
+                
+                // Show typing indicator
+                const typingElement = showTyping();
+                
+                try {
+                    // Send POST request to /chat/ endpoint
+                    const response = await fetch('/chat/', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRFToken': getCSRFToken() || 'not-required-for-demo'
+                        },
+                        body: JSON.stringify({ message })
+                    });
+                    
+                    // Hide typing indicator
+                    typingElement.remove();
+                    
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    
+                    const data = await response.json();
+                    
+                    if (data.error) {
+                        addMessage(`Error: ${data.error}`);
+                    } else {
+                        // Handle different response types
+                        if (data.level === 'general') {
+                            addMessage(data.response);
+                        } else if (data.level === 'full_analysis') {
+                            const resp = data.response;
+                            
+                            // Display profile info
+                            let profileText = "<strong>Your Profile:</strong><br>";
+                            profileText += `Age: ${resp.profile.age || 'Not specified'}<br>`;
+                            profileText += `Occupation: ${resp.profile.occupation || 'Not specified'}<br>`;
+                            profileText += `Income: ${resp.profile.income_bracket || 'Not specified'}<br>`;
+                            profileText += `Risk Appetite: ${resp.profile.risk_appetite || 'Not specified'}`;
+                            addMessage(profileText);
+                            
+                            // Display recommendations
+                            addMessage("<strong>Recommended Plans:</strong><br>" + resp.recommendations.replace(/\n/g, '<br>'));
+                            
+                            // Display comparison if available
+                            if (resp.comparison && !resp.comparison.includes("None")) {
+                                addMessage("<strong>Plan Comparison:</strong><br>" + resp.comparison.replace(/\n/g, '<br>'));
+                            }
+                            
+                            // Display summary
+                            addMessage("<strong>Summary:</strong><br>" + resp.summary.replace(/\n/g, '<br>'));
+                        } else {
+                            addMessage("I'm not sure how to respond to that. Could you rephrase?");
+                        }
+                    }
+                } catch (error) {
+                    typingElement.remove();
+                    addMessage("Sorry, there was an error processing your request. Please try again.");
+                    console.error('Error:', error);
+                }
+            }
+            
+            // Event listeners for sending messages
+            sendMessageBtn.addEventListener('click', sendMessage);
+            userInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendMessage();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

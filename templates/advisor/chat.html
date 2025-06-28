@@ -1,0 +1,134 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insurance Advisor Chat</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="chat-container">
+        <header class="chat-header">
+            <h1><i class="fas fa-shield-alt"></i> Insurance Advisor</h1>
+            <p>Get personalized insurance recommendations</p>
+        </header>
+        
+        <div class="chat-box" id="chatBox">
+            <div class="message bot">
+                <div class="message-content">
+                    Hello! I'm your AI Insurance Advisor. Tell me about yourself - your age, occupation, income, and what insurance needs you have.
+                </div>
+            </div>
+        </div>
+        
+        <div class="input-area">
+            <input type="text" id="userInput" placeholder="Type your message here..." autofocus>
+            <button id="sendButton">Send</button>
+        </div>
+    </div>
+
+    <script>
+        const chatBox = document.getElementById('chatBox');
+        const userInput = document.getElementById('userInput');
+        const sendButton = document.getElementById('sendButton');
+        
+        function addMessage(text, isUser = false) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${isUser ? 'user' : 'bot'}`;
+            
+            const contentDiv = document.createElement('div');
+            contentDiv.className = 'message-content';
+            contentDiv.innerHTML = text;
+            
+            messageDiv.appendChild(contentDiv);
+            chatBox.appendChild(messageDiv);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+        
+        function formatResponse(response) {
+            let formatted = '';
+            
+            if (response.level === 'general') {
+                return response.response;
+            }
+            
+            if (response.level === 'full_analysis') {
+                const data = response.response;
+                
+                formatted += `<div class="profile-summary">
+                    <h3>Your Profile:</h3>
+                    <ul>
+                        <li>Age: ${data.profile.age || 'Not specified'}</li>
+                        <li>Marital Status: ${data.profile.marital_status || 'Not specified'}</li>
+                        <li>Occupation: ${data.profile.occupation || 'Not specified'}</li>
+                        <li>Income: ${data.profile.income_bracket || 'Not specified'}</li>
+                        <li>Risk Appetite: ${data.profile.risk_appetite || 'Not specified'}</li>
+                    </ul>
+                </div>`;
+                
+                if (data.explanation && data.explanation !== "None") {
+                    formatted += `<div class="explanation">
+                        <h3>Term Explanation:</h3>
+                        <p>${data.explanation}</p>
+                    </div>`;
+                }
+                
+                formatted += `<div class="recommendations">
+                    <h3>Recommended Plans:</h3>
+                    <p>${data.recommendations.replace(/\n/g, '<br>')}</p>
+                </div>`;
+                
+                if (data.comparison && !data.comparison.includes("None")) {
+                    formatted += `<div class="comparison">
+                        <h3>Plan Comparison:</h3>
+                        ${data.comparison.replace(/\n/g, '<br>')}
+                    </div>`;
+                }
+                
+                formatted += `<div class="summary">
+                    <h3>Summary:</h3>
+                    <p>${data.summary.replace(/\n/g, '<br>')}</p>
+                </div>`;
+            }
+            
+            return formatted || "I couldn't generate a response. Please try again.";
+        }
+        
+        async function sendMessage() {
+            const message = userInput.value.trim();
+            if (!message) return;
+            
+            addMessage(message, true);
+            userInput.value = '';
+            
+            try {
+                const response = await fetch('/chat/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': '{{ csrf_token }}'
+                    },
+                    body: JSON.stringify({ message })
+                });
+                
+                const data = await response.json();
+                
+                if (data.error) {
+                    addMessage(`Error: ${data.error}`);
+                } else {
+                    addMessage(formatResponse(data));
+                }
+            } catch (error) {
+                addMessage("Sorry, there was an error processing your request.");
+            }
+        }
+        
+        sendButton.addEventListener('click', sendMessage);
+        userInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') sendMessage();
+        });
+    </script>
+</body>
+</html>
