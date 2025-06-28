@@ -82,7 +82,7 @@ This project is for educational/demo purposes only. It does not replace professi
 
 ## 📄 License
 
-MIT License © 2025 [Your Name](https://github.com/Mayank-711)
+MIT License © 2025 Mayank-711 (https://github.com/Mayank-711)
 
 
 
