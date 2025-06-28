@@ -6,13 +6,148 @@
     <title>Insurance Advisor Chatbot</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Main Styles */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        :root {
+            --primary: #4a6fa5;
+            --secondary: #166088;
+            --accent: #4fc3f7;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --success: #28a745;
+        }
+
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
             background-color: #f5f7fa;
             color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            color: var(--accent);
+        }
+
+        .hero {
+            text-align: center;
+            padding: 4rem 0;
+            background: url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+            color: white;
+            position: relative;
+            border-radius: 10px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background: #3ba1d1;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 3rem 0;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .feature-card i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--secondary);
         }
         
         /* Chatbot Button */
@@ -226,9 +361,72 @@
             border-radius: 8px;
             border-left: 4px solid #2563eb;
         }
+        footer {
+    background-color: #1f2937; /* Dark Gray (Tailwind's gray-800) */
+    color: #f9fafb; /* Light text (Tailwind's gray-100) */
+    padding: 20px 0;
+    text-align: center;
+    font-size: 0.95rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+footer .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+footer p {
+    margin: 0;
+    line-height: 1.5;
+}
+
     </style>
 </head>
 <body>
+    <body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fas fa-shield-alt"></i>
+                <span>InsuraCare</span>
+            </div>
+            <nav>
+                <a href="#" class="btn">Get Started</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Smart Insurance Solutions Tailored For You</h1>
+                <p>Our AI-powered advisor helps you find the perfect insurance coverage based on your unique needs and financial situation</p>
+                <a href="#" class="btn" id="startChatBtn"><i class="fas fa-comments"></i> Chat with Advisor</a>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="feature-card">
+                <i class="fas fa-user-shield"></i>
+                <h3>Personalized Plans</h3>
+                <p>Get insurance recommendations tailored specifically to your age, income, and family situation.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-chart-line"></i>
+                <h3>Smart Comparisons</h3>
+                <p>Compare different insurance products side-by-side to make informed decisions.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-hand-holding-usd"></i>
+                <h3>Save Money</h3>
+                <p>Discover the most cost-effective options without compromising on coverage.</p>
+            </div>
+        </section>
+    </main>
     <!-- Floating Chatbot Button -->
     <div class="chatbot-btn" id="chatbotBtn">
         <i class="fas fa-robot"></i>
@@ -243,8 +441,7 @@
         <div class="chatbot-body" id="chatBody">
             <div class="chat-message bot-message">
                 <p> Please tell me about yourself so I can help you find the best insurance options.</p>
-    <p>For example: <em>I'm 27, married, working in IT, earn 13LPA, want life insurance.</em></p>
-    <p>Also mention risk level low,medium,high</p>
+                <p>What do you want term life insurance , which bank etc</p>
             </div>
         </div>
         <div class="chatbot-footer">
@@ -253,138 +450,124 @@
         </div>
     </div>
 
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 InsuraCare. All rights reserved.</p>
+        </div>
+    </footer>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const chatbotBtn = document.getElementById('chatbotBtn');
-            const chatbot = document.getElementById('chatbot');
-            const closeChatbot = document.getElementById('closeChatbot');
-            const chatBody = document.getElementById('chatBody');
-            const userInput = document.getElementById('userInput');
-            const sendMessageBtn = document.getElementById('sendMessage');
-            
-            // Toggle chatbot visibility
-            chatbotBtn.addEventListener('click', function() {
-                chatbot.classList.toggle('active');
+document.addEventListener('DOMContentLoaded', function () {
+    const chatbotBtn = document.getElementById('chatbotBtn');
+    const chatbot = document.getElementById('chatbot');
+    const closeChatbot = document.getElementById('closeChatbot');
+    const chatBody = document.getElementById('chatBody');
+    const userInput = document.getElementById('userInput');
+    const sendMessageBtn = document.getElementById('sendMessage');
+
+    const userHistory = []; // store only user messages
+
+    // Toggle chatbot visibility
+    chatbotBtn.addEventListener('click', () => chatbot.classList.toggle('active'));
+    closeChatbot.addEventListener('click', () => chatbot.classList.remove('active'));
+
+    // Add message to chat UI
+    function addMessage(text, isUser = false) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `chat-message ${isUser ? 'user-message' : 'bot-message'}`;
+        const messageContent = document.createElement('p');
+        messageContent.innerHTML = text;
+        messageDiv.appendChild(messageContent);
+        chatBody.appendChild(messageDiv);
+        chatBody.scrollTop = chatBody.scrollHeight;
+    }
+
+    // Typing indicator
+    function showTyping() {
+        const typingDiv = document.createElement('div');
+        typingDiv.className = 'chat-message bot-message typing-indicator';
+        typingDiv.innerHTML = `
+            <p>Insurance Advisor is typing <span class="typing-dots">
+                <span></span><span></span><span></span>
+            </span></p>
+        `;
+        chatBody.appendChild(typingDiv);
+        chatBody.scrollTop = chatBody.scrollHeight;
+        return typingDiv;
+    }
+
+    // CSRF token helper
+    function getCSRFToken() {
+        const cookieValue = document.cookie
+            .split('; ')
+            .find(row => row.startsWith('csrftoken='))
+            ?.split('=')[1];
+        return cookieValue;
+    }
+
+    // Send message to backend
+    async function sendMessage() {
+        const latestInput = userInput.value.trim();
+        if (!latestInput) return;
+
+        addMessage(latestInput, true);      // Show user message
+        userHistory.push(latestInput);      // Store user message
+        userInput.value = '';               // Clear input field
+
+        const typingElement = showTyping();
+
+        try {
+            const fullMessage = userHistory.join('\n');  // Combine all messages
+
+            const response = await fetch('/chat/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCSRFToken() || 'not-required-for-demo'
+                },
+                body: JSON.stringify({
+                    message: fullMessage,    // Send full conversation
+                    userchat: userHistory    // Also send raw message list if needed
+                })
             });
-            
-            closeChatbot.addEventListener('click', function() {
-                chatbot.classList.remove('active');
-            });
-            
-            // Add message to chat
-            function addMessage(text, isUser = false) {
-                const messageDiv = document.createElement('div');
-                messageDiv.className = `chat-message ${isUser ? 'user-message' : 'bot-message'}`;
-                
-                const messageContent = document.createElement('p');
-                messageContent.innerHTML = text;
-                messageDiv.appendChild(messageContent);
-                
-                chatBody.appendChild(messageDiv);
-                chatBody.scrollTop = chatBody.scrollHeight;
-            }
-            
-            // Show typing indicator
-            function showTyping() {
-                const typingDiv = document.createElement('div');
-                typingDiv.className = 'chat-message bot-message typing-indicator';
-                typingDiv.innerHTML = `
-                    <p>Insurance Advisor is typing <span class="typing-dots">
-                        <span></span><span></span><span></span>
-                    </span></p>
-                `;
-                chatBody.appendChild(typingDiv);
-                chatBody.scrollTop = chatBody.scrollHeight;
-                return typingDiv;
-            }
-            
-            // Get CSRF token from cookies
-            function getCSRFToken() {
-                const cookieValue = document.cookie
-                    .split('; ')
-                    .find(row => row.startsWith('csrftoken='))
-                    ?.split('=')[1];
-                return cookieValue;
-            }
-            
-            // Send message to backend
-            async function sendMessage() {
-                const message = userInput.value.trim();
-                if (!message) return;
-                
-                // Add user message to chat
-                addMessage(message, true);
-                userInput.value = '';
-                
-                // Show typing indicator
-                const typingElement = showTyping();
-                
-                try {
-                    // Send POST request to /chat/ endpoint
-                    const response = await fetch('/chat/', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-CSRFToken': getCSRFToken() || 'not-required-for-demo'
-                        },
-                        body: JSON.stringify({ message })
-                    });
-                    
-                    // Hide typing indicator
-                    typingElement.remove();
-                    
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
-                    
-                    const data = await response.json();
-                    
-                    if (data.error) {
-                        addMessage(`Error: ${data.error}`);
-                    } else {
-                        // Handle different response types
-                        if (data.level === 'general') {
-                            addMessage(data.response);
-                        } else if (data.level === 'full_analysis') {
-                            const resp = data.response;
-                            
-                            // Display profile info
-                            let profileText = "<strong>Your Profile:</strong><br>";
-                            profileText += `Age: ${resp.profile.age || 'Not specified'}<br>`;
-                            profileText += `Occupation: ${resp.profile.occupation || 'Not specified'}<br>`;
-                            profileText += `Income: ${resp.profile.income_bracket || 'Not specified'}<br>`;
-                            profileText += `Risk Appetite: ${resp.profile.risk_appetite || 'Not specified'}`;
-                            addMessage(profileText);
-                            
-                            // Display recommendations
-                            addMessage("<strong>Recommended Plans:</strong><br>" + resp.recommendations.replace(/\n/g, '<br>'));
-                            
-                            // Display comparison if available
-                            if (resp.comparison && !resp.comparison.includes("None")) {
-                                addMessage("<strong>Plan Comparison:</strong><br>" + resp.comparison.replace(/\n/g, '<br>'));
-                            }
-                            
-                            // Display summary
-                            addMessage("<strong>Summary:</strong><br>" + resp.summary.replace(/\n/g, '<br>'));
-                        } else {
-                            addMessage("I'm not sure how to respond to that. Could you rephrase?");
+
+            typingElement.remove();
+
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+            const data = await response.json();
+
+            if (data.error) {
+                addMessage(`Error: ${data.error}`);
+            } else if (data.messages && Array.isArray(data.messages)) {
+                data.messages.forEach(msg => {
+                    if (msg.text) addMessage(msg.text, msg.role === 'user');
+                });
+            } else if (data.response) {
+                if (typeof data.response === 'string') {
+                    addMessage(data.response);
+                } else {
+                    Object.values(data.response).forEach(value => {
+                        if (value && typeof value === 'string') {
+                            addMessage(value.replace(/\n/g, "<br>"));
                         }
-                    }
-                } catch (error) {
-                    typingElement.remove();
-                    addMessage("Sorry, there was an error processing your request. Please try again.");
-                    console.error('Error:', error);
+                    });
                 }
+            } else {
+                addMessage("I'm not sure how to respond to that. Could you rephrase?");
             }
-            
-            // Event listeners for sending messages
-            sendMessageBtn.addEventListener('click', sendMessage);
-            userInput.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    sendMessage();
-                }
-            });
-        });
-    </script>
+
+        } catch (error) {
+            typingElement.remove();
+            addMessage("Sorry, there was an error processing your request.");
+            console.error('Error:', error);
+        }
+    }
+
+    sendMessageBtn.addEventListener('click', sendMessage);
+    userInput.addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') sendMessage();
+    });
+});
+</script>
+
 </body>
 </html>

@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>InsuraCare - Smart Insurance Advisor</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         :root {
             --primary: #4a6fa5;
@@ -29,7 +28,127 @@
             line-height: 1.6;
         }
 
-        /* (Previous CSS styles remain the same) */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            color: var(--accent);
+        }
+
+        .hero {
+            text-align: center;
+            padding: 4rem 0;
+            background: url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+            color: white;
+            position: relative;
+            border-radius: 10px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background: #3ba1d1;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 3rem 0;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .feature-card i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
 
         /* Chatbot Styles */
         .chatbot-container {
@@ -220,207 +339,117 @@
         .chatbot-btn i {
             font-size: 1.5rem;
         }
+
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .chatbot-container {
+                width: 90%;
+                right: 5%;
+                bottom: 10px;
+            }
+        }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <!-- Chatbot button and container -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fas fa-shield-alt"></i>
+                <span>InsuraCare</span>
+            </div>
+            <nav>
+                <a href="#" class="btn">Get Started</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Smart Insurance Solutions Tailored For You</h1>
+                <p>Our AI-powered advisor helps you find the perfect insurance coverage based on your unique needs and financial situation</p>
+                <a href="#" class="btn" id="startChatBtn"><i class="fas fa-comments"></i> Chat with Advisor</a>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="feature-card">
+                <i class="fas fa-user-shield"></i>
+                <h3>Personalized Plans</h3>
+                <p>Get insurance recommendations tailored specifically to your age, income, and family situation.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-chart-line"></i>
+                <h3>Smart Comparisons</h3>
+                <p>Compare different insurance products side-by-side to make informed decisions.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-hand-holding-usd"></i>
+                <h3>Save Money</h3>
+                <p>Discover the most cost-effective options without compromising on coverage.</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Chatbot Button -->
     <div class="chatbot-btn" id="chatbotBtn">
         <i class="fas fa-robot"></i>
     </div>
-    
+
+    <!-- Chatbot Container -->
     <div class="chatbot-container" id="chatbot">
         <div class="chatbot-header">
-            <h3><i class="fas fa-shield-alt"></i> Insurance Advisor</h3>
+            <h3><i class="fas fa-robot"></i> InsuraBot</h3>
             <button id="closeChatbot"><i class="fas fa-times"></i></button>
         </div>
-        <div class="chatbot-body" id="chatBody"></div>
+        <div class="chatbot-body" id="chatBody">
+            <!-- Messages will appear here -->
+        </div>
         <div class="chatbot-footer">
             <input type="text" id="userInput" placeholder="Type your message...">
             <button id="sendMessage"><i class="fas fa-paper-plane"></i></button>
         </div>
     </div>
 
-    <script>
-        // Chatbot state
-        const chatState = {
-            currentLevel: 1,
-            profile: {},
-            isGeneralQuestion: false,
-            chatHistory: []
-        };
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 InsuraCare. All rights reserved.</p>
+        </div>
+    </footer>
 
-        // DOM elements
-        const chatbot = document.getElementById('chatbot');
-        const chatBody = document.getElementById('chatBody');
-        const userInput = document.getElementById('userInput');
-        const chatbotBtn = document.getElementById('chatbotBtn');
-        const closeChatbot = document.getElementById('closeChatbot');
-        const sendBtn = document.getElementById('sendMessage');
-        
-        // Initialize chat
-        function initChat() {
-            if (chatBody.children.length === 0) {
-                addBotMessage("Welcome! I'm your insurance advisor. Let's start:\n\n1. Your age\n2. Occupation\n3. Annual income\n\nExample: \"I'm 30, work in IT, earn 15LPA\"");
-            }
-        }
-
-        // Toggle chatbot visibility
-        function toggleChatbot() {
-            chatbot.style.display = chatbot.style.display === 'flex' ? 'none' : 'flex';
-            if (chatbot.style.display === 'flex') {
-                userInput.focus();
-                initChat();
-            }
-        }
-
-        // Add message to chat
-        function addMessage(sender, text, quickReplies = []) {
-            const messageDiv = document.createElement('div');
-            messageDiv.className = `message ${sender}-message`;
-            messageDiv.innerHTML = `<strong>${sender === 'bot' ? 'Advisor' : 'You'}:</strong> ${text}`;
-            
-            if (quickReplies.length > 0) {
-                const quickRepliesDiv = document.createElement('div');
-                quickRepliesDiv.className = 'quick-replies';
-                
-                quickReplies.forEach(reply => {
-                    const replyBtn = document.createElement('div');
-                    replyBtn.className = 'quick-reply';
-                    replyBtn.textContent = reply;
-                    replyBtn.onclick = () => {
-                        userInput.value = reply;
-                        sendMessage();
-                    };
-                    quickRepliesDiv.appendChild(replyBtn);
-                });
-                
-                messageDiv.appendChild(quickRepliesDiv);
-            }
-            
-            chatBody.appendChild(messageDiv);
-            chatState.chatHistory.push({ sender, text });
-            scrollToBottom();
-        }
-
-        // Add bot message
-        function addBotMessage(text, quickReplies = []) {
-            addMessage('bot', text, quickReplies);
-        }
-
-        // Scroll to bottom of chat
-        function scrollToBottom() {
-            chatBody.scrollTop = chatBody.scrollHeight;
-        }
-
-        // Show typing indicator
-        function showTypingIndicator() {
-            const typingDiv = document.createElement('div');
-            typingDiv.className = 'typing-indicator';
-            typingDiv.id = 'typingIndicator';
-            typingDiv.innerHTML = `
-                <span class="typing-dot"></span>
-                <span class="typing-dot"></span>
-                <span class="typing-dot"></span>
-            `;
-            chatBody.appendChild(typingDiv);
-            scrollToBottom();
-        }
-
-        // Hide typing indicator
-        function hideTypingIndicator() {
-            const typing = document.getElementById('typingIndicator');
-            if (typing) typing.remove();
-        }
-
-        // Send message to backend
-        async function sendMessage() {
-            const message = userInput.value.trim();
-            if (!message) return;
-            
-            // Security: Basic input sanitization
-            const sanitizedMessage = sanitizeInput(message);
-            if (!sanitizedMessage) {
-                addBotMessage("Please enter a valid message");
-                return;
-            }
-            
-            addMessage('user', sanitizedMessage);
-            userInput.value = '';
-            
-            showTypingIndicator();
-            
-            try {
-                // Check if this is a general question
-                if (isGeneralQuestion(sanitizedMessage)) {
-                    const response = await askGeneralQuestion(sanitizedMessage);
-                    addBotMessage(response);
-                } else {
-                    await processLevel(sanitizedMessage);
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                addBotMessage("Sorry, I encountered an error. Please try again.");
-            } finally {
-                hideTypingIndicator();
-            }
-        }
-
-        // Basic input sanitization
-        function sanitizeInput(input) {
-            // Remove potentially harmful tags/scripts
-            const sanitized = input.replace(/<[^>]*>?/gm, '');
-            // Trim and check if empty
-            return sanitized.trim();
-        }
-
+    
         // Detect general insurance questions
         function isGeneralQuestion(message) {
-            // Only allow insurance-related general questions
-            const insuranceKeywords = [
-                'insurance', 'policy', 'premium', 'coverage', 'claim',
-                'term life', 'health insurance', 'ulip', 'endowment',
-                'pension', 'maturity', 'benefit', 'rider', 'deductible',
-                'what is', 'explain', 'how does', 'tell me about',
-                'difference between', 'meaning of'
+            const generalKeywords = [
+                'what is', 'explain', 'how does', 'tell me about', 
+                'difference between', 'meaning of', 'bank', 'policy',
+                'claim', 'premium', 'coverage', 'insurance'
             ];
-            
-            const lowerMsg = message.toLowerCase();
-            return insuranceKeywords.some(keyword => lowerMsg.includes(keyword));
+            return generalKeywords.some(keyword => 
+                message.toLowerCase().includes(keyword)) && 
+                chatState.currentLevel > 1;
         }
 
-        // Ask general insurance question to backend
+        // Ask general insurance question to Gemini
         async function askGeneralQuestion(question) {
-            try {
-                const response = await fetch('/api/gemini', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRFToken': getCSRFToken()
-                    },
-                    body: JSON.stringify({
-                        prompt: question,
-                        context: chatState.chatHistory.slice(-3).map(m => `${m.sender}: ${m.text}`).join('\n')
-                    })
-                });
-                
-                const data = await response.json();
-                if (data.success) {
-                    return data.response;
-                }
-                return "I couldn't process that question. Please try asking differently.";
-            } catch (error) {
-                console.error('API Error:', error);
-                return "I'm having trouble connecting. Please try again later.";
-            }
-        }
-
-        // Get CSRF token for security
-        function getCSRFToken() {
-            const cookieValue = document.cookie
-                .split('; ')
-                .find(row => row.startsWith('csrftoken='))
-                ?.split('=')[1];
-            return cookieValue || '';
+            const prompt = `Act as an insurance expert. Explain this in simple terms with an analogy: ${question}
+            Provide a 2-3 sentence answer suitable for a customer, then after "TECHNICAL:" give a more detailed explanation.`;
+            
+            // In production, call your backend which calls Gemini API
+            // For demo, we'll simulate a response
+            return simulateGeminiResponse(prompt);
         }
 
         // Process conversation level
@@ -436,117 +465,70 @@
 
         // Level 1: Profile collection
         async function processLevel1(message) {
+            const prompt = `Extract insurance profile details from: "${message}"
+            Return JSON with: age, occupation, income, maritalStatus, dependents.
+            Example: {"age":28,"occupation":"IT","income":"15LPA","maritalStatus":"single","dependents":false}`;
+            
+            const response = await simulateGeminiResponse(prompt);
+            
             try {
-                const response = await fetch('/api/chat/', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRFToken': getCSRFToken()
-                    },
-                    body: JSON.stringify({
-                        message: message,
-                        level: 1,
-                        profile: chatState.profile
-                    })
-                });
+                const profile = JSON.parse(response);
+                chatState.profile = profile;
+                chatState.currentLevel = 2;
                 
-                const data = await response.json();
-                if (data.success) {
-                    chatState.profile = data.profile;
-                    chatState.currentLevel = data.next_level;
-                    addBotMessage(data.response, ["Health cover", "Tax saving", "Wealth creation"]);
-                } else {
-                    addBotMessage("Could you clarify your profile details?");
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                addBotMessage("Sorry, I couldn't process that. Please try again.");
+                addBotMessage(`Thanks! Now, what are your financial priorities?
+                \n1. Health cover\n2. Tax saving\n3. Wealth creation\n4. Child education\n5. Retirement`);
+            } catch (e) {
+                addBotMessage("Let me confirm: You're " + 
+                    (profile.age ? `${profile.age} years old, ` : "") +
+                    (profile.occupation ? `a ${profile.occupation}, ` : "") +
+                    (profile.income ? `earning ${profile.income}` : "") + 
+                    "\n\nIs this correct? (Please clarify any incorrect info)");
             }
         }
 
         // Level 2: Financial goals
         async function processLevel2(message) {
+            const prompt = `Extract financial goals from: "${message}"
+            Return JSON array like ["health", "tax"]. Possible goals: health, tax, wealth, child, retirement.`;
+            
+            const goals = await simulateGeminiResponse(prompt);
+            
             try {
-                const response = await fetch('/api/chat/', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRFToken': getCSRFToken()
-                    },
-                    body: JSON.stringify({
-                        message: message,
-                        level: 2,
-                        profile: chatState.profile
-                    })
-                });
-                
-                const data = await response.json();
-                if (data.success) {
-                    chatState.profile = data.profile;
-                    chatState.currentLevel = data.next_level;
-                    addBotMessage(data.response, ["Low", "Medium", "High"]);
-                } else {
-                    addBotMessage("I'll assume health and tax priorities. How about investment risk? (low/medium/high)");
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                addBotMessage("Sorry, I couldn't process that. Please try again.");
+                chatState.profile.goals = JSON.parse(goals);
+                chatState.currentLevel = 3;
+                addBotMessage("How comfortable are you with investment risks?\n1. Low (safe)\n2. Medium (balanced)\n3. High (growth)");
+            } catch (e) {
+                chatState.profile.goals = ["health", "tax"];
+                addBotMessage("I'll assume health and tax saving are priorities. How about investment risk? (low/medium/high)");
             }
         }
 
         // Level 3: Risk appetite
         async function processLevel3(message) {
-            try {
-                const response = await fetch('/api/chat/', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRFToken': getCSRFToken()
-                    },
-                    body: JSON.stringify({
-                        message: message,
-                        level: 3,
-                        profile: chatState.profile
-                    })
-                });
-                
-                const data = await response.json();
-                if (data.success) {
-                    chatState.profile = data.profile;
-                    chatState.currentLevel = data.next_level;
-                    addBotMessage(data.response, ["Compare plans", "Explain terms", "Get quotes"]);
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                addBotMessage("Sorry, I couldn't generate recommendations. Please try again.");
-            }
+            const prompt = `Classify risk appetite from: "${message}" as "low", "medium", or "high".`;
+            
+            chatState.profile.riskAppetite = (await simulateGeminiResponse(prompt)).toLowerCase();
+            chatState.currentLevel = 4;
+            
+            // Generate recommendations
+            const recPrompt = `Recommend insurance for profile: ${JSON.stringify(chatState.profile)}
+            Suggest 1-3 products from: term life, health, ULIP, endowment, child, retirement.
+            For each, include:\n- Why it fits\n- Example premium\nFormat as bullet points.`;
+            
+            const recommendations = await simulateGeminiResponse(recPrompt);
+            addBotMessage(`Based on your profile:\n\n${recommendations}\n\nWhat would you like to do next?`);
         }
 
         // Level 4: Recommendations
         async function processLevel4(message) {
             if (message.toLowerCase().includes('compare')) {
-                try {
-                    const response = await fetch('/api/chat/', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-CSRFToken': getCSRFToken()
-                        },
-                        body: JSON.stringify({
-                            message: message,
-                            level: 4,
-                            profile: chatState.profile
-                        })
-                    });
-                    
-                    const data = await response.json();
-                    if (data.success) {
-                        addBotMessage(data.response);
-                    }
-                } catch (error) {
-                    console.error('Error:', error);
-                    addBotMessage("Sorry, I couldn't generate the comparison. Please try again.");
-                }
+                const prompt = `Compare insurance products for: ${JSON.stringify(chatState.profile)}
+                Create a table comparing 2-3 relevant products across:
+                Product, Premium, Coverage, Risk, Term. Use markdown format.`;
+                
+                const comparison = await simulateGeminiResponse(prompt);
+                addBotMessage(comparison);
             } 
             else if (message.toLowerCase().includes('explain')) {
                 const term = message.toLowerCase().includes('ulip') ? 'ULIP' : 
@@ -556,32 +538,51 @@
                 addBotMessage(explanation);
             }
             else {
-                addBotMessage("How else can I help? You can:\n- Compare plans\n- Get more details\n- Start over",
-                    ["Compare plans", "Explain terms", "Start over"]);
+                addBotMessage("How else can I help? You can:\n- Compare plans\n- Get more details\n- Start over");
             }
         }
 
         // Level 5: Follow-ups
         async function processLevel5(message) {
+            // Handle any follow-up questions
             const response = await askGeneralQuestion(message);
             addBotMessage(response);
         }
 
+        // Simulate Gemini response (replace with actual API call)
+        async function simulateGeminiResponse(prompt) {
+            // In production, you would call:
+            // const response = await fetch('/api/gemini', {
+            //     method: 'POST',
+            //     body: JSON.stringify({ prompt })
+            // });
+            // return response.json().answer;
+            
+            // Simulation for demo:
+            const simulatedResponses = {
+                "extract insurance profile": `{"age":28,"occupation":"IT","income":"15LPA","maritalStatus":"single","dependents":false}`,
+                "extract financial goals": `["health","tax"]`,
+                "classify risk appetite": "medium",
+                "recommend insurance": `- **Term Life Insurance**: ₹1Cr cover @₹12k/yr - Essential for your family's future\n- **Health Insurance**: ₹10L cover @₹8k/yr - Covers medical emergencies\n- **ULIP**: Good for tax saving with growth potential`,
+                "compare insurance products": `| Product | Premium | Coverage | Risk | Term |\n|---------|---------|----------|------|------|\n| Term Life | ₹12k/yr | ₹1Cr | None | 20y |\n| Health | ₹8k/yr | ₹10L | None | Annual |\n| ULIP | ₹50k/yr | Market-linked | High | 10y |`,
+                "explain ULIP": "A ULIP combines insurance with investment - like a hybrid car 🚗 with both safety and performance. TECHNICAL: Unit-Linked Insurance Plans invest premiums in funds while providing life cover.",
+                "explain term insurance": "Term insurance is pure protection - like a safety net 🛡️ for your family. TECHNICAL: Provides death benefit only, no maturity value, lowest cost for high coverage."
+            };
+            
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            
+            for (const [key, value] of Object.entries(simulatedResponses)) {
+                if (prompt.toLowerCase().includes(key)) return value;
+            }
+            return "Here's some information about that...";
+        }
+
         // Event listeners
-        chatbotBtn.addEventListener('click', toggleChatbot);
-        closeChatbot.addEventListener('click', toggleChatbot);
-        sendBtn.addEventListener('click', sendMessage);
+        document.getElementById('chatbotBtn').addEventListener('click', toggleChatbot);
+        document.getElementById('closeChatbot').addEventListener('click', toggleChatbot);
+        document.getElementById('sendMessage').addEventListener('click', sendMessage);
         userInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') sendMessage();
-        });
-
-        // Initialize chat when page loads
-        document.addEventListener('DOMContentLoaded', function() {
-            // Check if chatbot should be open by default
-            const urlParams = new URLSearchParams(window.location.search);
-            if (urlParams.get('chat') === 'open') {
-                toggleChatbot();
-            }
         });
     </script>
 </body>
