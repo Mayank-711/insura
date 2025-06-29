@@ -19,7 +19,6 @@ An intelligent insurance advisor chatbot built with **Django**, **Gemini AI**, a
 
 - **Backend:** Django (Python)
 - **Frontend:** HTML5, CSS3, JavaScript
-- **AI Model:** Gemini Pro / Gemma 3B (via `google.generativeai`)
 - **Other:** Prompt engineering, JSON profile extraction, structured HTML rendering
 
 ---
